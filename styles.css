@@ -101,10 +101,7 @@ h1, h2, h3, p { margin-top: 0; }
 .tray__body { position: absolute; inset: 0; display: block; animation: tray-bob 4.5s ease-in-out infinite; animation-delay: var(--bob, 0s); }
 .tray--empanadas .tray__body { --bob: -1.4s; }
 .tray--medallions .tray__body { --bob: -2.8s; }
-.tray__art { position: relative; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(3px 4px 0 var(--ink)); transition: transform .35s cubic-bezier(.3,1.6,.5,1); }
-.tray__art .o { stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
-.tray__art .o--thin { stroke-width: 1.8; }
-.tray__snack { transform-box: fill-box; transform-origin: 50% 100%; }
+.tray__art { position: relative; display: block; width: 100%; height: 100%; border: 3px solid var(--ink); border-radius: 18px; box-sizing: border-box; object-fit: cover; object-position: center; filter: drop-shadow(3px 4px 0 var(--ink)); transition: transform .35s cubic-bezier(.3,1.6,.5,1); }
 .tray__shadow { position: absolute; left: 10%; right: 6%; bottom: -4%; height: 22%; border-radius: 50%; background: #272b1d33; transition: transform .35s ease, opacity .35s ease; }
 .tray__label { position: absolute; left: 6%; bottom: -4%; padding: .42rem .7rem; display: inline-flex; align-items: center; gap: .45rem; border-radius: 30px; background: #fffdf4ef; color: var(--ink); box-shadow: 0 6px 16px rgba(55,48,35,.14); font-size: .64rem; font-weight: 700; white-space: nowrap; transition: transform .2s ease, background .2s, color .2s; }
 .tray__label b { color: var(--tomato); font-size: .6rem; letter-spacing: .13em; }
@@ -119,9 +116,6 @@ h1, h2, h3, p { margin-top: 0; }
 .tray:hover .tray__label, .tray:focus-visible .tray__label { transform: translateY(-3px); }
 .tray.is-selected .tray__label { background: var(--tomato); color: white; transform: translateY(-3px); }
 .tray.is-selected .tray__label b { color: #fcf3df; }
-.tray:hover .tray__snack, .tray:focus-visible .tray__snack { animation: snack-hop .55s cubic-bezier(.3,1.5,.5,1) both; }
-.tray__art > g:nth-child(2n) .tray__snack { animation-delay: .07s; }
-.tray__art > g:nth-child(3n) .tray__snack { animation-delay: .14s; }
 .tray:hover .tray__steam i, .tray:focus-visible .tray__steam i, .tray.is-selected .tray__steam i { animation: steam-rise 1.8s ease-out infinite; }
 .tray__steam i:nth-child(2) { animation-delay: .5s !important; }
 .tray__steam i:nth-child(3) { animation-delay: 1s !important; }
@@ -136,7 +130,6 @@ h1, h2, h3, p { margin-top: 0; }
 .tray-info__link[hidden] { display: none; }
 .hero__disclaimer { position: absolute; z-index: 3; right: 0; bottom: -58px; margin: 0; color: var(--muted); font-size: .64rem; letter-spacing: .02em; }
 @keyframes tray-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-@keyframes snack-hop { 0%,100% { transform: translateY(0) scale(1); } 35% { transform: translateY(-9px) scale(1.06, .94); } 65% { transform: translateY(1px) scale(.96, 1.05); } }
 @keyframes steam-rise { 0% { opacity: 0; transform: translateY(14px) scaleY(.6); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(-22px) translateX(4px) scaleY(1.1); } }
 @keyframes tray-pop { 0% { scale: 1; } 40% { scale: 1.08 .94; } 70% { scale: .97 1.04; } 100% { scale: 1; } }
 .floating-sticker { position: absolute; width: 106px; height: 106px; display: flex; flex-direction: column; align-items: center; justify-content: center; right: -2%; top: -2%; background: var(--olive); color: #fcf3df; border-radius: 50%; text-align: center; transform: rotate(11deg); box-shadow: 0 8px 18px #34402b33; }
