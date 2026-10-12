@@ -75,7 +75,61 @@ if (supportsFinePointer && !window.matchMedia("(prefers-reduced-motion: reduce)"
   });
 }
 
-const deliveryZones = document.querySelectorAll(".delivery-map__zone");
+const trayScene = document.querySelector("[data-tray-scene]");
+if (trayScene) {
+  const stage = trayScene.querySelector(".tray-scene__stage");
+  const trays = trayScene.querySelectorAll(".tray");
+  const info = trayScene.querySelector(".tray-info");
+  const infoTitle = trayScene.querySelector("[data-tray-title]");
+  const infoDesc = trayScene.querySelector("[data-tray-desc]");
+  const infoLink = trayScene.querySelector("[data-tray-link]");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const replayAnimation = (element, className) => {
+    if (reducedMotion) return;
+    element.classList.remove(className);
+    void element.offsetWidth;
+    element.classList.add(className);
+  };
+
+  trays.forEach((tray) => {
+    tray.addEventListener("click", () => {
+      trays.forEach((item) => {
+        const isSelected = item === tray;
+        item.classList.toggle("is-selected", isSelected);
+        item.setAttribute("aria-pressed", String(isSelected));
+      });
+      infoTitle.textContent = tray.dataset.name;
+      infoDesc.textContent = tray.dataset.desc;
+      infoLink.href = `https://wa.me/573024669960?text=${encodeURIComponent(tray.dataset.msg)}`;
+      infoLink.target = "_blank";
+      infoLink.rel = "noreferrer";
+      infoLink.setAttribute("aria-label", `Pedir ${tray.dataset.name.toLowerCase()} por WhatsApp`);
+      infoLink.hidden = false;
+      replayAnimation(tray, "is-popping");
+      replayAnimation(info, "is-updated");
+    });
+    tray.addEventListener("animationend", () => tray.classList.remove("is-popping"));
+  });
+  info?.addEventListener("animationend", () => info.classList.remove("is-updated"));
+
+  // La escena entera se inclina siguiendo el puntero para dar profundidad.
+  if (supportsFinePointer && !reducedMotion) {
+    trayScene.addEventListener("pointermove", (event) => {
+      const bounds = trayScene.getBoundingClientRect();
+      const x = (event.clientX - bounds.left) / bounds.width;
+      const y = (event.clientY - bounds.top) / bounds.height;
+      stage.style.setProperty("--rx", `${(0.5 - y) * 10}deg`);
+      stage.style.setProperty("--ry", `${(x - 0.5) * 14}deg`);
+    });
+    trayScene.addEventListener("pointerleave", () => {
+      stage.style.removeProperty("--rx");
+      stage.style.removeProperty("--ry");
+    });
+  }
+}
+
+const deliveryZones =document.querySelectorAll(".delivery-map__zone");
 const deliveryStatus = document.querySelector("#delivery-zone-status");
 const deliveryCta = document.querySelector("#delivery-cta");
 let selectedDeliveryZone = "";
