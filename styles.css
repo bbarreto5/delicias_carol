@@ -95,7 +95,9 @@ h1, h2, h3, p { margin-top: 0; }
 .tray:focus-visible .tray__art { filter: drop-shadow(0 0 0 var(--tomato)) drop-shadow(3px 4px 0 var(--ink)); }
 .tray--sticks { left: 3%; top: 15%; transform: translateZ(-30px) rotate(-5deg); }
 .tray--empanadas { right: 1%; top: 25%; transform: translateZ(0) rotate(5deg); }
-.tray--medallions { left: 22%; top: 49%; transform: translateZ(60px) rotate(-2deg); }
+.tray--medallions { left: 19%; top: 49%; transform: translateZ(60px) rotate(-2deg); }
+.tray--creams { width: 33%; right: -4%; top: 58%; transform: translateZ(90px) rotate(3deg); }
+.tray--creams .tray__body { --bob: -.7s; }
 .tray__body { position: absolute; inset: 0; display: block; animation: tray-bob 4.5s ease-in-out infinite; animation-delay: var(--bob, 0s); }
 .tray--empanadas .tray__body { --bob: -1.4s; }
 .tray--medallions .tray__body { --bob: -2.8s; }
@@ -106,8 +108,10 @@ h1, h2, h3, p { margin-top: 0; }
 .tray__shadow { position: absolute; left: 10%; right: 6%; bottom: -4%; height: 22%; border-radius: 50%; background: #272b1d33; transition: transform .35s ease, opacity .35s ease; }
 .tray__label { position: absolute; left: 6%; bottom: -4%; padding: .42rem .7rem; display: inline-flex; align-items: center; gap: .45rem; border-radius: 30px; background: #fffdf4ef; color: var(--ink); box-shadow: 0 6px 16px rgba(55,48,35,.14); font-size: .64rem; font-weight: 700; white-space: nowrap; transition: transform .2s ease, background .2s, color .2s; }
 .tray__label b { color: var(--tomato); font-size: .6rem; letter-spacing: .13em; }
+.tray--sticks .tray__label { bottom: auto; top: -2%; }
 .tray--empanadas .tray__label { left: auto; right: 6%; bottom: auto; top: -2%; }
-.tray--medallions .tray__label { left: auto; right: 4%; }
+.tray--medallions .tray__label { left: auto; right: 6%; }
+.tray--creams .tray__label { left: auto; right: 4%; bottom: -10%; }
 .tray__steam { position: absolute; left: 30%; right: 30%; top: -14%; height: 40%; display: flex; justify-content: space-around; pointer-events: none; }
 .tray__steam i { width: 12px; height: 34px; border: 3px solid transparent; border-left-color: #fffcf5e6; border-radius: 50%; opacity: 0; }
 .tray:hover .tray__art, .tray:focus-visible .tray__art, .tray.is-selected .tray__art { transform: translateY(-14px) rotate(-2deg) scale(1.04); }
@@ -122,7 +126,7 @@ h1, h2, h3, p { margin-top: 0; }
 .tray__steam i:nth-child(2) { animation-delay: .5s !important; }
 .tray__steam i:nth-child(3) { animation-delay: 1s !important; }
 .tray.is-popping .tray__art { animation: tray-pop .5s cubic-bezier(.3,1.6,.5,1); }
-.tray-info { position: absolute; z-index: 3; left: -25px; bottom: 10px; max-width: min(340px, 92%); display: flex; gap: .75rem; align-items: center; padding: .8rem 1rem; background: var(--paper); box-shadow: 0 8px 24px rgba(55,48,35,.12); font-size: .62rem; line-height: 1.45; transform: translateZ(80px); }
+.tray-info { position: absolute; z-index: 3; left: -25px; bottom: -34px; max-width: min(340px, 92%); display: flex; gap: .75rem; align-items: center; padding: .8rem 1rem; background: var(--paper); box-shadow: 0 8px 24px rgba(55,48,35,.12); font-size: .62rem; line-height: 1.45; transform: translateZ(80px); }
 .tray-info.is-updated { animation: tray-pop .45s cubic-bezier(.3,1.6,.5,1); }
 .tray-info__icon { width: 30px; height: 30px; flex-shrink: 0; display: grid; place-items: center; background: var(--tomato); color: white; border-radius: 50%; font-size: 1rem; }
 .tray-info__text { display: grid; gap: .1rem; color: var(--muted); }
@@ -130,6 +134,7 @@ h1, h2, h3, p { margin-top: 0; }
 .tray-info__link { flex-shrink: 0; min-height: 38px; padding: .6rem .85rem; display: inline-flex; align-items: center; gap: .6rem; border-radius: 3px; background: var(--olive); color: #fffdf7; font-size: .7rem; font-weight: 700; transition: transform .2s, background .2s, box-shadow .2s; }
 .tray-info__link:hover { background: var(--olive-deep); transform: translateY(-2px); box-shadow: 0 8px 18px rgba(39,43,29,.15); }
 .tray-info__link[hidden] { display: none; }
+.hero__disclaimer { position: absolute; z-index: 3; right: 0; bottom: -58px; margin: 0; color: var(--muted); font-size: .64rem; letter-spacing: .02em; }
 @keyframes tray-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 @keyframes snack-hop { 0%,100% { transform: translateY(0) scale(1); } 35% { transform: translateY(-9px) scale(1.06, .94); } 65% { transform: translateY(1px) scale(.96, 1.05); } }
 @keyframes steam-rise { 0% { opacity: 0; transform: translateY(14px) scaleY(.6); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(-22px) translateX(4px) scaleY(1.1); } }
@@ -139,7 +144,7 @@ h1, h2, h3, p { margin-top: 0; }
 .floating-sticker small { margin-top: .28rem; font-size: .59rem; line-height: 1.3; letter-spacing: .04em; text-transform: uppercase; }
 .hero__spark { position: absolute; z-index: 2; color: var(--tomato); }
 .hero__spark--one { left: 3%; top: 4%; font-size: 1.75rem; }
-.hero__spark--two { right: 2%; bottom: 9%; color: #f4f1e7; font-size: 1.9rem; }
+.hero__spark--two { right: 40%; top: 3%; color: #f4f1e7; font-size: 1.9rem; }
 .hero__bottomline { position: absolute; bottom: 32px; left: var(--gutter); display: flex; align-items: center; gap: .75rem; color: var(--muted); font-size: .58rem; letter-spacing: .16em; }
 .hero__bottomline > span:first-child { color: var(--tomato); font-size: .67rem; font-weight: 700; }
 .bottomline__rule { width: 45px; height: 1px; background: #c9c5b8; }
@@ -287,8 +292,11 @@ h1, h2, h3, p { margin-top: 0; }
   .hero__actions { gap: 1.15rem; margin: 1.5rem 0 1.5rem; }
   .hero__visual { width: min(100%, 520px); min-height: clamp(320px, 88vw, 420px); margin: .2rem auto 0; }
   .tray { width: 52%; }
+  .tray--creams { width: 36%; right: 0; }
+  .tray--creams .tray__label { right: 10%; }
+  .hero__disclaimer { left: 0; right: auto; bottom: -98px; font-size: .6rem; }
   .tray__label { font-size: .58rem; padding: .32rem .55rem; }
-  .hero__visual { margin-bottom: 64px; }
+  .hero__visual { margin-bottom: 96px; }
   .tray-info { left: 0; bottom: -66px; padding: .62rem .72rem; }
   .floating-sticker { width: 81px; height: 81px; right: -1%; top: -2%; }
   .floating-sticker small { font-size: .5rem; }
